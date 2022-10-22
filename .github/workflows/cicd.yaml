@@ -26,6 +26,7 @@ jobs:
               name: node_modules
               path: node_modules   
   test:
+    needs: job1
     runs-on: ubuntu-latest
     steps:
           - 
@@ -37,6 +38,7 @@ jobs:
             name: Run unit tests
             run: npm test
   publish:
+    needs: job2
     runs-on: ubuntu-latest
     steps:
           - 
