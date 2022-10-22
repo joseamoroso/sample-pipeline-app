@@ -1,0 +1,34 @@
+{
+  "name": "simple-app",
+  "version": "1.0.0",
+  "description": "simple app with jwt",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests/*.spec.js",
+    "coverage": "nyc --reporter=text npm test",
+    "run": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseamoroso/sample-pipeline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joseamoroso/sample-pipeline/issues"
+  },
+  "homepage": "https://github.com/joseamoroso/sample-pipeline#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "rewire": "^6.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.1.0",
+    "nyc": "^15.1.0"
+  }
+}
