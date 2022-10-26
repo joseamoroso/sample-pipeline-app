@@ -4,7 +4,7 @@
   "description": "simple app with jwt",
   "main": "index.js",
   "scripts": {
-    "test": "sudo mocha ./tests/*.spec.js",
+    "test": "mocha ./tests/*.spec.js",
     "coverage": "nyc --reporter=text npm test",
     "run": "node server.js"
   },
