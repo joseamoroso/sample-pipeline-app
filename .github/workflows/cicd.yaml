@@ -24,25 +24,32 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
               name: node_modules
-              path: node_modules   
-  test:
+              path: node_modules/** 
+  # test:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #         -
+  #           name: Checkout 
+  #           uses: actions/checkout@v3
+  #         - 
+  #           name: Get node modules
+  #           uses: actions/download-artifact@v3
+  #           with:
+  #             name: node_modules
+  #         -
+  #           name: Run unit tests
+  #           run: |
+  #             npm i -g mocha
+  #             npm test
+  publish:
+    # needs: test
     needs: build
     runs-on: ubuntu-latest
     steps:
-          - 
-            name: Get node modules
-            uses: actions/download-artifact@v3
-            with:
-              name: node_modules
           -
-            name: Run unit tests
-            run: |
-              npm i -g mocha
-              npm test
-  publish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
+            name: Checkout 
+            uses: actions/checkout@v3
           - 
             name: Extract branch name
             shell: bash
