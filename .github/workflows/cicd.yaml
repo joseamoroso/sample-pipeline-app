@@ -55,7 +55,7 @@ jobs:
               username: ${{ secrets.DOCKER_HUB_USERNAME }}
               password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           - 
-            name: Get node modules
+            name: Get node modules.
             uses: actions/download-artifact@v3
             with:
               name: node_modules
@@ -63,6 +63,7 @@ jobs:
             name: Build and push
             shell: bash
             run: |
+              ls -la
               docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ github.sha }}
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ steps.extract_branch.outputs.branch }}
