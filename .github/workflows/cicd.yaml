@@ -25,27 +25,26 @@ jobs:
             with:
               name: node_modules
               path: node_modules
-  # test:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #         -
-  #           name: Checkout 
-  #           uses: actions/checkout@v3
-  #         - 
-  #           name: Get node modules
-  #           uses: actions/download-artifact@v3
-  #           with:
-  #             name: node_modules
-  #         -
-  #           name: Run unit tests
-  #           run: |
-  #             npm i -g mocha
-  #             npm test
-  publish:
-    # needs: test
+  test:
     needs: build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    steps:
+          -
+            name: Checkout 
+            uses: actions/checkout@v3
+          - 
+            name: Get node modules
+            uses: actions/download-artifact@v3
+            with:
+              name: node_modules
+          -
+            name: Run unit tests
+            run: |
+              npm i -g mocha
+              npm test
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
           -
             name: Checkout 
@@ -70,7 +69,6 @@ jobs:
           -
             name: Build and push
             run: |
-              ls -la
               docker build --no-cache . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ github.sha }}
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ steps.extract_branch.outputs.branch }}
