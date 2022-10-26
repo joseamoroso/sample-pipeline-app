@@ -71,7 +71,7 @@ jobs:
             name: Build and push
             run: |
               ls -la
-              docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest -debug
+              docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ github.sha }}
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ steps.extract_branch.outputs.branch }}
               docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ github.sha }}
