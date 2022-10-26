@@ -37,6 +37,7 @@ jobs:
             uses: actions/download-artifact@v3
             with:
               name: node_modules
+              path: node_modules
           -
             name: Run unit tests
             run: |
@@ -69,7 +70,7 @@ jobs:
           -
             name: Build and push
             run: |
-              docker build --no-cache . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest
+              docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ github.sha }}
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ steps.extract_branch.outputs.branch }}
               docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ github.sha }}
