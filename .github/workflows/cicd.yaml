@@ -38,7 +38,7 @@ jobs:
             name: Run unit tests
             run: |
               chmod 0555 ./node_modules/.bin/mocha
-              sudo chown -R `whoami`` ./node_modules/.bin/mocha
+              sudo chown -R `whoami` ./node_modules/.bin/mocha
               npm test
   publish:
     needs: test
