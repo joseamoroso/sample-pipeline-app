@@ -36,7 +36,7 @@ jobs:
               name: node_modules
           -
             name: Run unit tests
-            run: sudo npm test
+            run: npm test
   publish:
     needs: test
     runs-on: ubuntu-latest
