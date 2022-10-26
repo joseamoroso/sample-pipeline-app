@@ -39,6 +39,9 @@ jobs:
             run: |
               chmod 0555 ./node_modules/.bin/mocha
               sudo chown -R `whoami` ./node_modules/.bin/mocha
+              ls -l
+              ls -l node_modules
+              ls -l node_modules/.bin
               npm test
   publish:
     needs: test
