@@ -71,7 +71,7 @@ jobs:
             name: Build and push
             run: |
               ls -la
-              docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest
+              docker build --no-cache . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ github.sha }}
               docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ steps.extract_branch.outputs.branch }}
               docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app-node:${{ github.sha }}
