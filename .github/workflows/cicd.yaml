@@ -60,16 +60,12 @@ jobs:
             with:
               name: node_modules
           -
-            name: Set up Docker Buildx
-            uses: docker/setup-buildx-action@v2
-          -
             name: Build and push
-            uses: docker/build-push-action@v3
-            with:
-              context: ./
-              file: ./Dockerfile
-              builder: ${{ steps.buildx.outputs.name }}
-              push: true
-              tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ github.sha }}, ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ steps.extract_branch.outputs.branch }}
-              cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:buildcache
-              cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:buildcache,mode=max
+            shell: bash
+            run: |
+              docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest
+              docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ github.sha }}
+              docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ steps.extract_branch.outputs.branch }}
+              docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ github.sha }}
+              docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sample-app:${{ steps.extract_branch.outputs.branch }}
+            id: buid_push_image
